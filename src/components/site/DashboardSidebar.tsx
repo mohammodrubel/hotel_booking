@@ -160,7 +160,6 @@ export default function DashboardSidebar() {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="relative overflow-hidden rounded-2xl bg-card p-5 ring-1 ring-foreground/10"
       >
-        <div className="pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full bg-accent/20 blob" />
         <div className="relative flex items-center gap-3">
           <motion.img
             whileHover={{ scale: 1.06 }}

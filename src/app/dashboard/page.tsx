@@ -72,22 +72,141 @@ export default function DashboardOverview() {
     },
   ];
 
+  const nextBooking = bookings.data?.data?.[0];
+  const daysUntilNext = nextBooking
+    ? Math.max(
+        0,
+        Math.ceil(
+          (new Date(nextBooking.check_in).getTime() - Date.now()) /
+            (1000 * 60 * 60 * 24)
+        )
+      )
+    : null;
+
   return (
     <div className="space-y-10">
       <FadeIn>
-        <div className="relative overflow-hidden rounded-3xl bg-foreground p-8 text-background ring-1 ring-foreground/10 md:p-10">
-          <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-accent/40 blob" />
-          <div className="pointer-events-none absolute -bottom-24 -left-10 h-64 w-64 rounded-full bg-[#93c5fd]/25 blob blob-2" />
-          <Badge className="border border-background/20 bg-background/10 text-background hover:bg-background/10">
-            <Sparkles className="size-3 text-accent" />
-            Dashboard
-          </Badge>
-          <h1 className="mt-4 text-display text-4xl font-semibold tracking-tight md:text-5xl">
-            Welcome back{user ? `, ${user.name.split(" ")[0]}` : ""}
-          </h1>
-          <p className="mt-2 max-w-lg text-base text-background/70">
-            Here&apos;s what&apos;s on your itinerary.
-          </p>
+        <div className="relative overflow-hidden rounded-3xl ring-1 ring-border shadow-lift">
+          <img
+            src="/images/manuelajaeger-hotel-1749602.jpg"
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/75 to-foreground/40" />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-32 -top-32 h-72 w-72 rounded-full bg-primary/30 blur-3xl"
+          />
+
+          <div className="relative grid gap-8 p-8 md:p-12 lg:grid-cols-[1.4fr_1fr]">
+            <div className="text-background">
+              <Badge className="gap-1.5 border border-background/20 bg-background/10 text-background backdrop-blur hover:bg-background/10">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                </span>
+                Dashboard
+              </Badge>
+              <h1 className="mt-4 text-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
+                Welcome back
+                {user ? (
+                  <>
+                    , <span className="text-primary">{user.name.split(" ")[0]}</span>
+                  </>
+                ) : null}
+              </h1>
+              <p className="mt-3 max-w-md text-base text-background/80">
+                Here&apos;s what&apos;s on your itinerary.
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link href="/hotels">
+                  <Button className="gap-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90">
+                    Plan a trip
+                    <ArrowRight className="size-4" />
+                  </Button>
+                </Link>
+                <Link href="/dashboard/bookings">
+                  <Button
+                    variant="outline"
+                    className="gap-2 rounded-xl border-background/30 bg-background/10 text-background backdrop-blur hover:bg-background/20 hover:text-background"
+                  >
+                    <CalendarCheck className="size-4" />
+                    View bookings
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {nextBooking ? (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="relative overflow-hidden rounded-2xl bg-background/95 p-5 text-foreground shadow-lift backdrop-blur"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
+                  Next stay
+                </p>
+                <div className="mt-3 flex items-center gap-4">
+                  <img
+                    src={nextBooking.image}
+                    alt={nextBooking.hotel_name}
+                    className="h-14 w-14 rounded-xl object-cover ring-1 ring-border"
+                  />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold">
+                      {nextBooking.hotel_name}
+                    </p>
+                    <p className="truncate text-xs text-muted-foreground">
+                      {nextBooking.room_name}
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4 flex items-end justify-between border-t border-border pt-4">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                      Check in
+                    </p>
+                    <p className="text-sm font-semibold">
+                      {formatDate(nextBooking.check_in)}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                      In
+                    </p>
+                    <p className="text-display text-2xl font-semibold tracking-tight text-primary">
+                      {daysUntilNext}d
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="relative overflow-hidden rounded-2xl bg-background/95 p-6 text-foreground shadow-lift backdrop-blur"
+              >
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary">
+                  <Sparkles className="size-5" />
+                </div>
+                <p className="mt-4 font-heading text-base font-semibold">
+                  No trips yet
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Discover curated stays handpicked for you.
+                </p>
+                <Link href="/hotels" className="mt-4 inline-block">
+                  <Button size="sm" className="gap-1.5 rounded-xl">
+                    Browse hotels
+                    <ArrowRight className="size-3.5" />
+                  </Button>
+                </Link>
+              </motion.div>
+            )}
+          </div>
         </div>
       </FadeIn>
 

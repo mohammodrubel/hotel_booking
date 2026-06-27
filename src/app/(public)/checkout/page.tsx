@@ -131,8 +131,8 @@ export default function CheckoutPage() {
       </FadeIn>
 
       <FadeIn delay={0.05}>
-        <h1 className="text-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-          Checkout
+        <h1 className="text-display text-4xl font-semibold tracking-tight md:text-5xl">
+          <span className="text-primary">Checkout</span>
         </h1>
         <p className="mt-2 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
           <Lock className="size-3" />
@@ -222,7 +222,7 @@ export default function CheckoutPage() {
             <Button
               type="submit"
               size="lg"
-              className="w-full gap-2 rounded-xl bg-foreground text-background hover:bg-foreground/85"
+              className="w-full gap-2 rounded-xl bg-primary text-primary-foreground shadow-lift hover:bg-primary/90"
               disabled={submitting}
             >
               {submitting ? (

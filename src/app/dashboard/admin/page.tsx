@@ -49,8 +49,6 @@ export default function AdminOverviewPage() {
     <div className="space-y-10">
       <FadeIn>
         <div className="relative overflow-hidden rounded-3xl bg-foreground p-8 text-background ring-1 ring-foreground/10 md:p-10">
-          <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-accent/40 blob" />
-          <div className="pointer-events-none absolute -bottom-24 -left-10 h-64 w-64 rounded-full bg-[#93c5fd]/25 blob blob-2" />
           <Badge className="border border-background/20 bg-background/10 text-background hover:bg-background/10">
             <ShieldCheck className="size-3 text-accent" />
             Admin console

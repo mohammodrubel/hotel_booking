@@ -75,73 +75,187 @@ export default function Home() {
       <SiteHeader />
 
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-aurora" />
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-noise opacity-50" />
-        <motion.div
+      <section className="relative overflow-hidden bg-gradient-to-b from-secondary/40 via-background to-background">
+        <div
           aria-hidden
-          className="pointer-events-none absolute -top-32 left-1/4 -z-10 h-96 w-96 rounded-full bg-accent/30 blob"
+          className="pointer-events-none absolute -top-32 -right-32 h-[28rem] w-[28rem] rounded-full bg-primary/15 blur-3xl"
         />
-        <motion.div
+        <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-32 right-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-[color:#93c5fd]/25 blob blob-2"
+          className="pointer-events-none absolute -bottom-40 -left-20 h-[24rem] w-[24rem] rounded-full bg-primary/10 blur-3xl"
         />
+        <div className="pointer-events-none absolute inset-0 -z-10 grid-lines opacity-40" />
 
-        <div className="container pt-20 pb-12 md:pt-28 md:pb-20">
-          <FadeIn delay={0.1}>
-            <Badge className="border border-border bg-background/80 px-3 py-1 text-foreground backdrop-blur hover:bg-background/80">
-              <Sparkles className="size-3 text-accent" />
-              {cms.hero.badge}
-            </Badge>
-          </FadeIn>
-
-          <h1 className="mt-6 max-w-4xl text-display text-5xl font-semibold tracking-tight text-foreground md:text-7xl">
-            <RevealText>{cms.hero.titleLine1}</RevealText>
-            <br />
-            <RevealText delay={0.15}>{cms.hero.titleLine2}</RevealText>{" "}
-            <span className="gradient-text">{cms.hero.titleAccent}</span>
-          </h1>
-
-          <FadeIn delay={0.5}>
-            <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-              {cms.hero.subtitle}
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={0.7}>
-            <div className="mt-8 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex -space-x-2">
-                {cms.hero.socialProofAvatars.map((i) => (
-                  <img
-                    key={i}
-                    src={`https://i.pravatar.cc/64?img=${i}`}
-                    alt=""
-                    className="h-8 w-8 rounded-full border-2 border-background object-cover"
-                  />
-                ))}
-              </div>
-              <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="size-3.5 fill-accent text-accent" />
-                ))}
-                <span className="ml-1 text-foreground">
-                  {cms.hero.socialProofText}
+        <div className="container relative grid items-center gap-12 pt-16 pb-12 md:pt-24 md:pb-20 lg:grid-cols-[1.05fr_0.95fr]">
+          {/* LEFT — copy + search */}
+          <div className="relative">
+            <FadeIn delay={0.1}>
+              <Badge className="gap-1.5 border border-primary/20 bg-primary/10 px-3 py-1 text-primary hover:bg-primary/10">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                 </span>
+                {cms.hero.badge}
+              </Badge>
+            </FadeIn>
+
+            <h1 className="mt-6 text-display text-5xl font-semibold tracking-tight text-foreground md:text-6xl lg:text-7xl">
+              <RevealText>{cms.hero.titleLine1}</RevealText>
+              <br />
+              <RevealText delay={0.15}>{cms.hero.titleLine2}</RevealText>{" "}
+              <span className="text-primary">{cms.hero.titleAccent}</span>
+            </h1>
+
+            <FadeIn delay={0.5}>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                {cms.hero.subtitle}
+              </p>
+            </FadeIn>
+
+            <FadeIn delay={0.7}>
+              <div className="mt-7 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                <div className="flex -space-x-2">
+                  {cms.hero.socialProofAvatars.map((i) => (
+                    <img
+                      key={i}
+                      src={`https://i.pravatar.cc/64?img=${i}`}
+                      alt=""
+                      className="h-8 w-8 rounded-full border-2 border-background object-cover ring-1 ring-border"
+                    />
+                  ))}
+                </div>
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Star key={i} className="size-3.5 fill-primary text-primary" />
+                  ))}
+                  <span className="ml-1 font-medium text-foreground">
+                    {cms.hero.socialProofText}
+                  </span>
+                </div>
               </div>
+            </FadeIn>
+          </div>
+
+          {/* RIGHT — image mosaic */}
+          <FadeIn delay={0.3}>
+            <div className="relative mx-auto grid h-[480px] w-full max-w-[560px] grid-cols-6 grid-rows-6 gap-3">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="relative col-span-4 row-span-4 overflow-hidden rounded-3xl shadow-lift"
+              >
+                <img
+                  src="/images/manuelajaeger-hotel-1749602.jpg"
+                  alt="Featured stay"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between text-background">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-background/80">
+                      Featured
+                    </p>
+                    <p className="font-heading text-lg font-semibold">
+                      Emerald Grand
+                    </p>
+                  </div>
+                  <div className="inline-flex items-center gap-1 rounded-full bg-background/95 px-2.5 py-1 text-xs font-semibold text-foreground">
+                    <Star className="size-3 fill-primary text-primary" />
+                    4.9
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="relative col-span-2 row-span-3 overflow-hidden rounded-3xl shadow-soft"
+              >
+                <img
+                  src="/images/tianya1223-hotel-6878057.jpg"
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="relative col-span-2 row-span-3 overflow-hidden rounded-3xl shadow-soft"
+              >
+                <img
+                  src="/images/4787421-interior-2685521.jpg"
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                className="relative col-span-4 row-span-2 overflow-hidden rounded-3xl shadow-soft"
+              >
+                <img
+                  src="/images/erikawittlieb-living-room-2155376.jpg"
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </motion.div>
+
+              {/* floating stat pills */}
+              <motion.div
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+                className="float-y-slow absolute -left-6 top-10 flex items-center gap-3 rounded-2xl bg-card p-3 pr-4 shadow-lift ring-1 ring-border"
+              >
+                <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-primary-foreground">
+                  <ShieldCheck className="size-4" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Free cancel</p>
+                  <p className="text-sm font-semibold text-foreground">
+                    Up to 24h
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 1.05 }}
+                className="float-y absolute -right-4 bottom-10 flex items-center gap-3 rounded-2xl bg-card p-3 pr-4 shadow-lift ring-1 ring-border"
+              >
+                <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary/10 text-primary">
+                  <Sparkles className="size-4" />
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Trusted by</p>
+                  <p className="text-sm font-semibold text-foreground">
+                    12,000+ guests
+                  </p>
+                </div>
+              </motion.div>
             </div>
           </FadeIn>
+        </div>
 
-          {/* SEARCH CARD */}
+        {/* SEARCH CARD — full width below */}
+        <div className="container relative -mt-2 pb-12 md:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mt-12"
+            className="relative"
           >
-            <Tilt max={3}>
+            <Tilt max={2}>
               <form
                 onSubmit={onSearch}
-                className="relative rounded-3xl bg-card p-2 shadow-lift ring-1 ring-foreground/10"
+                className="relative rounded-3xl bg-card p-2 shadow-lift ring-1 ring-border"
               >
                 <div className="grid gap-2 md:grid-cols-[1.4fr_1fr_1fr_0.8fr_auto]">
                   <div className="group flex flex-col gap-1 rounded-2xl px-4 py-3 transition-colors hover:bg-secondary/40 focus-within:bg-secondary/40">
@@ -207,7 +321,7 @@ export default function Home() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="h-full w-full gap-2 rounded-2xl bg-foreground px-6 text-background hover:bg-foreground/85 md:min-h-14"
+                      className="h-full w-full gap-2 rounded-2xl bg-primary px-6 text-primary-foreground shadow-lift hover:bg-primary/90 md:min-h-14"
                     >
                       <Search className="size-4" />
                       Search
@@ -313,8 +427,7 @@ export default function Home() {
       </section>
 
       {/* PERKS */}
-      <section className="relative overflow-hidden bg-foreground text-background">
-        <div className="pointer-events-none absolute -top-32 right-0 h-96 w-96 rounded-full bg-accent/40 blob" />
+      <section className="relative overflow-hidden bg-primary text-primary-foreground">
         <div className="container py-24">
           <FadeIn>
             <div className="max-w-2xl">
@@ -570,9 +683,7 @@ export default function Home() {
       {/* CTA */}
       <section className="container py-24">
         <FadeIn>
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-foreground p-12 text-background md:p-20">
-            <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-accent/40 blob" />
-            <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-[#93c5fd]/30 blob blob-2" />
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-primary p-12 text-primary-foreground md:p-20">
             <div className="relative max-w-2xl">
               <h2 className="text-balance text-display text-4xl font-semibold tracking-tight md:text-6xl">
                 {cms.cta.title}

@@ -61,7 +61,7 @@ export default function SiteFooter() {
               />
               <button
                 type="submit"
-                className="group inline-flex items-center gap-1 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition-transform hover:scale-[1.03]"
+                className="group inline-flex items-center gap-1 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow-soft transition-transform hover:scale-[1.03] hover:bg-primary/90"
               >
                 Subscribe
                 <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -73,11 +73,11 @@ export default function SiteFooter() {
         <Stagger className="grid gap-10 border-t border-border pt-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
           <StaggerItem>
             <div className="flex items-center gap-2.5">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-foreground text-background">
+              <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-primary-foreground shadow-soft">
                 <span className="text-sm font-bold">S</span>
               </div>
               <span className="text-lg font-semibold tracking-tight text-foreground">
-                Stay<span className="text-accent">haus</span>
+                Stay<span className="text-primary">haus</span>
               </span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">

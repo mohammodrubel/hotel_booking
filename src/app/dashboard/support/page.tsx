@@ -77,7 +77,6 @@ export default function SupportPage() {
     <div className="space-y-8">
       <FadeIn>
         <div className="relative overflow-hidden rounded-3xl bg-foreground p-8 text-background md:p-10">
-          <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-accent/40 blob" />
           <div className="inline-flex items-center gap-2 rounded-full border border-background/20 bg-background/10 px-3 py-1 text-xs">
             <HelpCircle className="size-3 text-accent" />
             Help center

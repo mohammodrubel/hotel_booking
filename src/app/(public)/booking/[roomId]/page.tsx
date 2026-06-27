@@ -120,8 +120,8 @@ export default function BookingPage({
       </FadeIn>
 
       <FadeIn delay={0.05}>
-        <h1 className="text-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-          Reserve your stay
+        <h1 className="text-display text-4xl font-semibold tracking-tight md:text-5xl">
+          <span className="text-primary">Reserve your stay</span>
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {room.name} · {hotel.name}
@@ -240,7 +240,7 @@ export default function BookingPage({
                 <Button
                   type="submit"
                   size="lg"
-                  className="gap-2 rounded-xl bg-foreground text-background hover:bg-foreground/85"
+                  className="gap-2 rounded-xl bg-primary text-primary-foreground shadow-lift hover:bg-primary/90"
                 >
                   Continue to checkout
                   <ArrowRight className="size-4" />

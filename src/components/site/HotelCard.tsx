@@ -55,7 +55,7 @@ export default function HotelCard({
       className="group"
     >
       <Link href={`/hotels/${hotel.id}`} className="block">
-        <article className="relative overflow-hidden rounded-3xl bg-card ring-1 ring-foreground/10 transition-all duration-500 group-hover:shadow-lift group-hover:ring-foreground/20">
+        <article className="relative overflow-hidden rounded-3xl bg-card ring-1 ring-foreground/10 transition-all duration-500 group-hover:shadow-lift group-hover:ring-primary/40">
           <div className="relative aspect-[4/3] w-full overflow-hidden">
             <motion.img
               src={hotel.image}
@@ -133,8 +133,8 @@ export default function HotelCard({
                 <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
                   from
                 </p>
-                <p className="text-base font-semibold text-foreground">
-                  {formatCurrency(hotel.pricePerNight)}
+                <p className="text-base font-semibold">
+                  <span className="text-primary">{formatCurrency(hotel.pricePerNight)}</span>
                   <span className="ml-1 text-xs font-normal text-muted-foreground">
                     /night
                   </span>

@@ -15,14 +15,6 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-foreground/85 via-foreground/55 to-foreground/30" />
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute -top-20 -right-20 h-96 w-96 rounded-full bg-accent/40 blob"
-        />
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-32 -left-20 h-96 w-96 rounded-full bg-[#93c5fd]/30 blob blob-2"
-        />
 
         <div className="relative flex h-full flex-col justify-between p-12 text-background">
           <motion.div
@@ -74,7 +66,6 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       </div>
 
       <div className="relative flex items-center justify-center bg-background px-6 py-12">
-        <div className="pointer-events-none absolute inset-0 bg-aurora opacity-60 lg:opacity-0" />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}

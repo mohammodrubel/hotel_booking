@@ -22,8 +22,6 @@ export default function BookingConfirmedPage({
 
   return (
     <div className="relative mx-auto max-w-2xl overflow-hidden px-6 py-20 text-center">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-aurora opacity-70" />
-
       <div className="relative mx-auto h-24 w-24">
         <motion.div
           initial={{ scale: 0 }}

@@ -136,12 +136,13 @@ export default function HotelsPage() {
   );
 
   return (
-    <div className="container py-12">
+    <div className="relative">
+      <div className="container py-12">
       <FadeIn>
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-              Browse hotels
+            <h1 className="text-display text-4xl font-semibold tracking-tight md:text-5xl">
+              <span className="text-primary">Browse hotels</span>
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">
               <span className="font-medium text-foreground">{items.length}</span>{" "}
@@ -233,6 +234,7 @@ export default function HotelsPage() {
             )}
           </AnimatePresence>
         </div>
+      </div>
       </div>
     </div>
   );

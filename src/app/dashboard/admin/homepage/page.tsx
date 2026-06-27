@@ -12,6 +12,7 @@ import {
   Trash2,
   Sparkles,
   Layout,
+  Star,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -417,68 +418,147 @@ function HeroEditor({
       onSave={() => onSave(v)}
       saved={saved}
     >
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Badge text">
-          <Input
-            value={v.badge}
-            onChange={(e) => set({ ...v, badge: e.target.value })}
-            className="h-11 rounded-xl"
-          />
-        </Field>
-        <Field label="Social proof line">
-          <Input
-            value={v.socialProofText}
-            onChange={(e) => set({ ...v, socialProofText: e.target.value })}
-            className="h-11 rounded-xl"
-          />
-        </Field>
-        <Field label="Title line 1">
-          <Input
-            value={v.titleLine1}
-            onChange={(e) => set({ ...v, titleLine1: e.target.value })}
-            className="h-11 rounded-xl"
-          />
-        </Field>
-        <Field label="Title line 2">
-          <Input
-            value={v.titleLine2}
-            onChange={(e) => set({ ...v, titleLine2: e.target.value })}
-            className="h-11 rounded-xl"
-          />
-        </Field>
-        <Field label="Title accent (shimmer)">
-          <Input
-            value={v.titleAccent}
-            onChange={(e) => set({ ...v, titleAccent: e.target.value })}
-            className="h-11 rounded-xl"
-          />
-        </Field>
-        <Field label="Avatar IDs (comma-separated, 1–70)">
-          <Input
-            value={v.socialProofAvatars.join(", ")}
-            onChange={(e) =>
-              set({
-                ...v,
-                socialProofAvatars: e.target.value
-                  .split(",")
-                  .map((s) => Number(s.trim()))
-                  .filter((n) => Number.isFinite(n) && n > 0),
-              })
-            }
-            className="h-11 rounded-xl"
-          />
-        </Field>
-        <div className="sm:col-span-2">
-          <Field label="Subtitle">
-            <TextArea
-              value={v.subtitle}
-              onChange={(e) => set({ ...v, subtitle: e.target.value })}
-              rows={3}
+      <div className="grid gap-6 xl:grid-cols-[1fr_420px]">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Field label="Badge text">
+            <Input
+              value={v.badge}
+              onChange={(e) => set({ ...v, badge: e.target.value })}
+              className="h-11 rounded-xl"
             />
           </Field>
+          <Field label="Social proof line">
+            <Input
+              value={v.socialProofText}
+              onChange={(e) => set({ ...v, socialProofText: e.target.value })}
+              className="h-11 rounded-xl"
+            />
+          </Field>
+          <Field label="Title line 1">
+            <Input
+              value={v.titleLine1}
+              onChange={(e) => set({ ...v, titleLine1: e.target.value })}
+              className="h-11 rounded-xl"
+            />
+          </Field>
+          <Field label="Title line 2">
+            <Input
+              value={v.titleLine2}
+              onChange={(e) => set({ ...v, titleLine2: e.target.value })}
+              className="h-11 rounded-xl"
+            />
+          </Field>
+          <Field label="Title accent (highlighted)">
+            <Input
+              value={v.titleAccent}
+              onChange={(e) => set({ ...v, titleAccent: e.target.value })}
+              className="h-11 rounded-xl"
+            />
+          </Field>
+          <Field label="Avatar IDs (comma-separated, 1–70)">
+            <Input
+              value={v.socialProofAvatars.join(", ")}
+              onChange={(e) =>
+                set({
+                  ...v,
+                  socialProofAvatars: e.target.value
+                    .split(",")
+                    .map((s) => Number(s.trim()))
+                    .filter((n) => Number.isFinite(n) && n > 0),
+                })
+              }
+              className="h-11 rounded-xl"
+            />
+          </Field>
+          <div className="sm:col-span-2">
+            <Field label="Subtitle">
+              <TextArea
+                value={v.subtitle}
+                onChange={(e) => set({ ...v, subtitle: e.target.value })}
+                rows={3}
+              />
+            </Field>
+          </div>
         </div>
+
+        <HeroPreview value={v} />
       </div>
     </SectionShell>
+  );
+}
+
+function HeroPreview({ value }: { value: HeroContent }) {
+  return (
+    <div className="xl:sticky xl:top-24 xl:self-start">
+      <div className="mb-3 flex items-center justify-between">
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          Live preview
+        </p>
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
+          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+          Live
+        </span>
+      </div>
+
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-secondary/40 via-background to-background ring-1 ring-border">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-primary/20 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-16 -left-10 h-40 w-40 rounded-full bg-primary/10 blur-3xl"
+        />
+
+        <div className="relative p-5">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[10px] font-medium text-primary">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+            </span>
+            {value.badge || "Badge"}
+          </div>
+
+          <h3 className="mt-3 text-display text-2xl font-semibold leading-tight tracking-tight text-foreground">
+            {value.titleLine1 || "Title line 1"}
+            <br />
+            {value.titleLine2 || "Title line 2"}{" "}
+            <span className="text-primary">
+              {value.titleAccent || "accent"}
+            </span>
+          </h3>
+
+          <p className="mt-3 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
+            {value.subtitle || "Subtitle preview will appear here."}
+          </p>
+
+          <div className="mt-4 flex items-center gap-3">
+            <div className="flex -space-x-1.5">
+              {value.socialProofAvatars.slice(0, 4).map((i) => (
+                <img
+                  key={i}
+                  src={`https://i.pravatar.cc/40?img=${i}`}
+                  alt=""
+                  className="h-6 w-6 rounded-full border-2 border-background object-cover"
+                />
+              ))}
+            </div>
+            <div className="flex items-center gap-0.5">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Star key={i} className="size-2.5 fill-primary text-primary" />
+              ))}
+              <span className="ml-1 text-[10px] font-medium text-foreground">
+                {value.socialProofText || "Social proof"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p className="mt-3 text-[11px] text-muted-foreground">
+        Preview updates as you type. Save to publish.
+      </p>
+    </div>
   );
 }
 
